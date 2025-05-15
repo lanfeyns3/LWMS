@@ -16,6 +16,9 @@ void LWMS_pollMessage(struct LWMSWindow* window)
         window->active = 0;
     }
 #endif // _WIN32
+#ifdef __linux__
+    XNextEvent(window->display,&window->event)
+#endif // __linux__
 
 }
 

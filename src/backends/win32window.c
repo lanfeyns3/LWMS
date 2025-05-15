@@ -1,3 +1,4 @@
+#ifdef _WIN32
 #define STB_IMAGE_IMPLEMENTATION
 #include "win32window.h"
 
@@ -135,3 +136,4 @@ struct createWindowReturn LWMS_Win32_create(const char* name)
 
 	return ret;
 }
+#endif

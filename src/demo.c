@@ -1,10 +1,10 @@
 #include "window.h"
 
 int main() {
-    struct LWMSWindow* window = LWMS_createWindow("SP[Alpha]");
-    while (window->active == 1)
+    struct LWMSWindow* ret = LWMS_createWindow("lol");
+
+    for (;;)
     {
-        LWMS_pollMessage(window);
+        XNextEvent(ret->display,&ret->event);
     }
-    return 0;
 }

@@ -31,4 +31,14 @@ struct LWMSWindow* LWMS_createWindow(const char* name)
     
     return newWindow;
 #endif // _WIN32
+#ifdef __linux__
+    struct createWindowReturn retX = LWMS_X11_create();
+    struct LWMSWindow* window = malloc(sizeof(struct LWMSWindow));
+
+    window->active = 1;
+    window->display = retX.display;
+    window->window = retX.window;
+    window->event = retX.event;
+    window->screen = retX.screen;
+#endif
 }

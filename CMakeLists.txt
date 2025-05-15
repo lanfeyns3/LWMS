@@ -20,8 +20,18 @@ if (NOT ${m_PRJ_EXISTS} OR ${DEV})
     if (DEMO STREQUAL "Y")
         message(STATUS "Building demo project")
             project("windowsManager" C)
-            add_executable(windowsManager "src/demo.c" "src/window.h" "src/window.c" "src/backends/win32window.h" "src/backends/win32window.c"  )
-            include_directories(${CMAKE_SOURCE_DIR}/vendor)
+            
+            find_package(X11 REQUIRED)
+            
+            add_executable(windowsManager 
+                "src/demo.c"
+                "src/window.h"
+                "src/window.c"
+                "src/backends/x11window.h"
+                "src/backends/x11window.c"
+            )
+            target_link_libraries(windowsManager ${X11_LIBRARIES})
+            target_include_directories(windowsManager PUBLIC ${X11_INCLUDE_DIR} PUBLIC ${CMAKE_SOURCE_DIR}/vendor)
             set(BUILT_PROJECT_${CMAKE_HOST_SYSTEM_NAME} CACHE STRING "Internal Variable")
     else()
         message("Building just library")
